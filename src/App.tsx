@@ -1,30 +1,36 @@
-// import { useState } from "react";
+import { useState } from "react";
 import { useAppSelector, useAppDispatch } from '../src/store/hooks';
-import './App.scss';
 import { fetchData } from "./store/reducers/translations/translationsSlice";
 import { IFetchQueries } from "../src/interfaces/IFetchQueries";
+import TextField from './components/TextField/TextField';
+import './App.scss';
 
 function App() {
-  
+
+  const [queryText, setQueryText] = useState<string>("");
+
   const translation = useAppSelector((state) => state.translations.translation);
   const dispatch = useAppDispatch();
 
   const lang = "de";
-  const text = "Hello, people!";
   
   const params: IFetchQueries = {
-    text,
+    text: queryText,
     lang
   }
 
   const translateText = () => {
+    setQueryText(queryText);
     dispatch(fetchData(params));
   }
 
   return (
     <div className="App">
-      <h1>{translation}</h1>
-      <button onClick={() => translateText()}>API test</button>
+      <div>
+        <TextField queryText={queryText} setQueryText={setQueryText}/>
+        <button onClick={() => translateText()}>Translate</button>
+        <p>{translation}</p>
+      </div>
     </div>
   );
 }
