@@ -1,4 +1,5 @@
 export interface ITextFieldProps {
     queryText: string,
-    setQueryText(value: string): void;
+    setQueryText(value: string): void,
+    disabled: boolean
 }

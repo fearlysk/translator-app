@@ -35,7 +35,7 @@ export const fetchData = (createAsyncThunk("data/fetchData", async (queries: IFe
         .then(response => response.json())
         .then(response => response)
         .catch(err => console.error(err));
-        
+
     return data;
 }))
 
@@ -49,6 +49,7 @@ export const translationsSlice = createSlice({
     },
    clearTranslation: (state) => {
       state.translation = "";
+      state.detectedLanguage = "";
    }
   },
   extraReducers: (builder) => {
