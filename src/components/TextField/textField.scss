@@ -1,13 +1,15 @@
+.textfield__wrapper {
+    margin-top: 10px;
+}
 .textfield {
     background-color: transparent;
     color: black;
     border: 1px solid black;
     resize: none;
     padding: 10px;
-    width: 40%;
+    width: 100%;
     border-radius: 10px;
     outline: none;
     overflow: auto;
     font-size: 28px;
-    margin-top: 10px;
 }

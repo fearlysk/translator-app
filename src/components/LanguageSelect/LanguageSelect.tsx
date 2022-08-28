@@ -3,16 +3,16 @@ import "./languageSelect.scss";
 
 const LanguageSelect = ({selectedLanguage, setSelectedLanguage}: ILanguageSelectProps) => {
     return (
-        <div>
+        <div className="select-menu__wrapper">
             <select   
-              className="select_menu"
+              className="select-menu"
               value={selectedLanguage}
               onChange={(e) => setSelectedLanguage(e.target.value)}>
-                <option value="ru">Russian</option>
-                <option value="en">English</option>
-                <option value="de">Deutsch</option>
-                <option value="es">Espanol</option>
-                <option value="it">Italian</option>
+                <option className="select-menu__option" value="ru">Russian</option>
+                <option className="select-menu__option" value="en">English</option>
+                <option className="select-menu__option" value="de">Deutsch</option>
+                <option className="select-menu__option" value="es">Espanol</option>
+                <option className="select-menu__option" value="it">Italian</option>
             </select>
         </div>
     )

@@ -1,17 +1,9 @@
-import { createSlice, PayloadAction, createAsyncThunk } from '@reduxjs/toolkit'
+import { createSlice, createAsyncThunk } from '@reduxjs/toolkit'
 import type { RootState } from '../../store';
 import { IFetchQueries } from "../../../interfaces/IFetchQueries";
+import { ITranslationsState } from '../../../interfaces/ITranslationsState';
 
-interface TranslationsState {
-  queryValue: string | undefined,
-  translation: string,
-  detectedLanguage: string,
-  resentTranslations: string[],
-  error: string | undefined,
-  isFetching: boolean
-}
-
-const initialState: TranslationsState = {
+const initialState: ITranslationsState = {
   queryValue: '',
   translation: '',
   detectedLanguage: '',

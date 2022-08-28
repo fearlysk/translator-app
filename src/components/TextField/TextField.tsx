@@ -1,15 +1,17 @@
 import { ITextFieldProps } from "../../interfaces/ITextFieldProps";
 import "./textField.scss";
 
-const TextField = ({queryText, setQueryText, disabled}: ITextFieldProps) => {
+const TextField = ({queryText, setQueryText, disabled, placeholder}: ITextFieldProps) => {
     return (
+      <div className="textfield__wrapper">
         <textarea 
           className="textfield"
-          placeholder=" Translate..."
+          placeholder={placeholder}
           value={queryText}
           disabled={disabled}
           onChange={(e) => setQueryText(e.target.value)}
         />
+      </div>
     )
 }
 

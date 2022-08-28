@@ -1,5 +1,18 @@
-.select_menu {
+.select-menu__wrapper {
+    width: 70%;
+}
+.select-menu {
     padding: 10px;
     border: 1px solid black;
-    width: 30%;
+    width: 100%;
+    transition: 0.3s;
+    font-size: 1em;
+}
+.select-menu:hover {
+    background-color: #a2b9f5;
+    transition: 0.3s;
+}
+.select-menu__option {
+    background-color: white;
+    color: #3f6bd9;
 }

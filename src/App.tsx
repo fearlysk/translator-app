@@ -2,11 +2,11 @@ import { useState, useEffect } from "react";
 import { useAppSelector, useAppDispatch } from '../src/store/hooks';
 import { clearTranslation, fetchData } from "./store/reducers/translations/translationsSlice";
 import { IFetchQueries } from "../src/interfaces/IFetchQueries";
-import 'react-loading-skeleton/dist/skeleton.css';
 import TextField from './components/TextField/TextField';
 import TextFieldSkeleton from "./components/TextFieldSkeleton/TextFieldSkeleton";
 import LanguageSelect from "./components/LanguageSelect/LanguageSelect";
 import './App.scss';
+import 'react-loading-skeleton/dist/skeleton.css';
 
 function App() {
 
@@ -29,12 +29,12 @@ function App() {
     setQueryText(translation);
   }
 
-  const setRu = () => {
-    setInputLanguage("ru");
-  }
-  const setEng = () => {
-    setInputLanguage("en");
-  }
+  // const setRu = () => {
+  //   setInputLanguage("ru");
+  // }
+  // const setEng = () => {
+  //   setInputLanguage("en");
+  // }
 
   useEffect(() => {
   const delayDebounceFn = setTimeout(() => {
@@ -53,18 +53,21 @@ function App() {
   return (
     <div className="App">
       <div>
-        <LanguageSelect selectedLanguage={inputLanguage} setSelectedLanguage={setInputLanguage} />
-        <TextField queryText={queryText} setQueryText={setQueryText} disabled={false}/>
-        <LanguageSelect selectedLanguage={selectedLanguage} setSelectedLanguage={setSelectedLanguage} />
-        <br />
-       
-        {/[a-zA-Z]/.test(queryText) && inputLanguage === "ru" ? <h3>Change language: <button onClick={() => setEng()}>English</button></h3> : null}
-        {/[а-яА-Я]/.test(queryText) && inputLanguage !== "ru" ? <h3>Change language: <button onClick={() => setRu()}>Russian</button></h3> : null}
-      
-        <br />
-        <button onClick={() => switchLanguages()}>Switch languages</button>
-        <br />
-        {queryText && !translation ? <TextFieldSkeleton /> : <TextField queryText={translation} setQueryText={setQueryText} disabled={true}/>}
+        <div className="translation-fields__wrapper">
+          <div className="translation-field__input">
+            <TextField queryText={queryText} setQueryText={setQueryText} disabled={false} placeholder=" Text to translate..." /> 
+            <LanguageSelect selectedLanguage={inputLanguage} setSelectedLanguage={setInputLanguage} />
+          </div>
+          <div className="translation-btn__switch"><button onClick={() => switchLanguages()}>Switch input and output languages</button></div>
+          <div className="translation-field__output">
+            {queryText && !translation ? <TextFieldSkeleton /> : <TextField queryText={translation} setQueryText={setQueryText} disabled={true} placeholder=" Translation..."/>}
+            <LanguageSelect selectedLanguage={selectedLanguage} setSelectedLanguage={setSelectedLanguage} />
+          </div>
+        </div>
+ 
+        {/[a-zA-Z]/.test(queryText) && inputLanguage === "ru" ? <h3>Your keyboard layout differs from selected language: <button onClick={() => switchLanguages()}>Switch</button></h3> : null}
+        {/[а-яА-Я]/.test(queryText) && inputLanguage !== "ru" ? <h3>Your keyboard layout differs from selected language: <button onClick={() => switchLanguages()}>Switch</button></h3> : null}
+        
         <p>{translation && queryText ? `Detected language: ${detectedLanguage}` : null}</p>
       </div>
     </div>
