@@ -29,6 +29,13 @@ function App() {
     setQueryText(translation);
   }
 
+  const setRu = () => {
+    setInputLanguage("ru");
+  }
+  const setEng = () => {
+    setInputLanguage("en");
+  }
+
   useEffect(() => {
   const delayDebounceFn = setTimeout(() => {
     setQueryText(queryText);
@@ -49,6 +56,11 @@ function App() {
         <LanguageSelect selectedLanguage={inputLanguage} setSelectedLanguage={setInputLanguage} />
         <TextField queryText={queryText} setQueryText={setQueryText} disabled={false}/>
         <LanguageSelect selectedLanguage={selectedLanguage} setSelectedLanguage={setSelectedLanguage} />
+        <br />
+       
+        {/[a-zA-Z]/.test(queryText) && inputLanguage === "ru" ? <h3>Change language: <button onClick={() => setEng()}>English</button></h3> : null}
+        {/[а-яА-Я]/.test(queryText) && inputLanguage !== "ru" ? <h3>Change language: <button onClick={() => setRu()}>Russian</button></h3> : null}
+      
         <br />
         <button onClick={() => switchLanguages()}>Switch languages</button>
         <br />
