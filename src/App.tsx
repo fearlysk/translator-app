@@ -1,35 +1,46 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useAppSelector, useAppDispatch } from '../src/store/hooks';
-import { fetchData } from "./store/reducers/translations/translationsSlice";
+import { clearTranslation, fetchData } from "./store/reducers/translations/translationsSlice";
 import { IFetchQueries } from "../src/interfaces/IFetchQueries";
 import TextField from './components/TextField/TextField';
+import LanguageSelect from "./components/LanguageSelect/LanguageSelect";
 import './App.scss';
 
 function App() {
 
-  const [queryText, setQueryText] = useState<string>("");
+  let [queryText, setQueryText] = useState<string>("");
+  let [selectedLanguage, setSelectedLanguage] = useState<string>("ru");
 
   const translation = useAppSelector((state) => state.translations.translation);
+  const detectedLanguage = useAppSelector((state) => state.translations.detectedLanguage);
   const dispatch = useAppDispatch();
-
-  const lang = "de";
   
   const params: IFetchQueries = {
     text: queryText,
-    lang
+    lang: selectedLanguage
   }
 
-  const translateText = () => {
+  useEffect(() => {
+  const delayDebounceFn = setTimeout(() => {
     setQueryText(queryText);
-    dispatch(fetchData(params));
-  }
+    if(queryText !== "") {
+        dispatch(fetchData(params));
+    } else {
+      dispatch(clearTranslation());
+    }
+   
+  }, 1000)
+  
+   return () => clearTimeout(delayDebounceFn)
+  }, [queryText, selectedLanguage])
 
   return (
     <div className="App">
       <div>
-        <TextField queryText={queryText} setQueryText={setQueryText}/>
-        <button onClick={() => translateText()}>Translate</button>
-        <p>{translation}</p>
+        <TextField queryText={queryText} setQueryText={setQueryText} />
+        <LanguageSelect selectedLanguage={selectedLanguage} setSelectedLanguage={setSelectedLanguage} />
+        <p>{translation && queryText ? `Detected language: ${detectedLanguage}` : null}</p>
+        <p>{translation && queryText ? translation : null}</p>
       </div>
     </div>
   );

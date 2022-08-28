@@ -5,6 +5,7 @@ import { IFetchQueries } from "../../../interfaces/IFetchQueries";
 interface TranslationsState {
   queryValue: string | undefined,
   translation: string,
+  detectedLanguage: string,
   resentTranslations: string[],
   error: string | undefined,
   isFetching: boolean
@@ -13,6 +14,7 @@ interface TranslationsState {
 const initialState: TranslationsState = {
   queryValue: '',
   translation: '',
+  detectedLanguage: '',
   resentTranslations: [],
   error: '',
   isFetching: false
@@ -33,11 +35,7 @@ export const fetchData = (createAsyncThunk("data/fetchData", async (queries: IFe
         .then(response => response.json())
         .then(response => response)
         .catch(err => console.error(err));
-
-    console.log(data);
-    // initialState.translation = data[0].translations[0].text;
-    console.log("t: ", initialState.translation);
-    console.log(queries.text);
+        
     return data;
 }))
 
@@ -48,8 +46,10 @@ export const translationsSlice = createSlice({
   reducers: {
    setQueryValue: (state, action) => {
       state.queryValue = action.payload;
-      // state.translation = 
-    }
+    },
+   clearTranslation: (state) => {
+      state.translation = "";
+   }
   },
   extraReducers: (builder) => {
     builder.addCase(fetchData.pending, (state) => {
@@ -59,6 +59,7 @@ export const translationsSlice = createSlice({
       state.isFetching = false;
       state.error = '';
       state.translation = action.payload[0].translations[0].text;
+      state.detectedLanguage = action.payload[0].detectedLanguage.language;
     })
     builder.addCase(fetchData.rejected, (state, action) => {
       state.error = action.error.message;
@@ -66,7 +67,7 @@ export const translationsSlice = createSlice({
   },
 })
 
-export const { setQueryValue } = translationsSlice.actions;
+export const { setQueryValue, clearTranslation } = translationsSlice.actions;
 export const selectCount = (state: RootState) => state.translations.translation;
 
 export default translationsSlice.reducer;
