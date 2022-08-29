@@ -8,6 +8,7 @@ const initialState: ITranslationsState = {
   translation: '',
   detectedLanguage: '',
   resentTranslations: [],
+  favoriteTranslations: [],
   error: '',
   isFetching: false
 }
@@ -42,6 +43,9 @@ export const translationsSlice = createSlice({
    clearTranslation: (state) => {
       state.translation = "";
       state.detectedLanguage = "";
+   }, 
+   addToFavorites: (state, action) => {
+      state.favoriteTranslations.push(action.payload);
    }
   },
   extraReducers: (builder) => {
@@ -60,7 +64,7 @@ export const translationsSlice = createSlice({
   },
 })
 
-export const { setQueryValue, clearTranslation } = translationsSlice.actions;
+export const { setQueryValue, clearTranslation, addToFavorites } = translationsSlice.actions;
 export const selectCount = (state: RootState) => state.translations.translation;
 
 export default translationsSlice.reducer;
