@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { useAppSelector, useAppDispatch } from '../../../src/store/hooks';
-import { clearTranslation, fetchData, addToFavorites } from "../../store/reducers/translations/translationsSlice";
+import { clearTranslation, fetchData, addToFavorites } from "../../store/reducers/translations/translationsReducer";
 import { IFetchQueries } from "../../../src/interfaces/IFetchQueries";
 import TextField from '../../components/TextField/TextField';
 import TextFieldSkeleton from "../../components/TextFieldSkeleton/TextFieldSkeleton";
