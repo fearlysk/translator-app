@@ -4,7 +4,7 @@ import "./TextFieldSkeleton.scss";
 const TextFieldSkeleton = () => {
     return (
       <div className="textfield-skeleton">  
-        <Skeleton count={1} height={30}/>
+        <Skeleton count={8} height={34}/>
       </div>
     )
 }

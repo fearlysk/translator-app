@@ -12,7 +12,7 @@ const Favorites = () => {
             <Link to="/">Go back</Link>
             <div>
                 {favorites.map((item) => 
-                  <p key={item.text}>{item.text} : {item.translation}</p>
+                  <p key={favorites.length}>{item.text} : {item.translation}</p>
                 )}
             </div>
         </div>

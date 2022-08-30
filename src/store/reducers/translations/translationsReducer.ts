@@ -57,6 +57,25 @@ export const translationsSlice = createSlice({
       state.error = '';
       state.translation = action.payload[0].translations[0].text;
       state.detectedLanguage = action.payload[0].detectedLanguage.language;
+      switch (state.detectedLanguage) {
+        case "en":
+          state.detectedLanguage = "English";
+          break;
+        case "ru":
+          state.detectedLanguage = "Russian";
+          break;  
+        case "it":
+          state.detectedLanguage = "Italian";
+          break;  
+        case "de":
+          state.detectedLanguage = "Deutsch";
+          break;  
+        case "es":
+          state.detectedLanguage = "Espanol";
+          break;
+        default:
+          state.detectedLanguage = "Unknown";
+      }
     })
     builder.addCase(fetchData.rejected, (state, action) => {
       state.error = action.error.message;

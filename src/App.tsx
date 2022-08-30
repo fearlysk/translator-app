@@ -1,4 +1,3 @@
-import { render } from "react-dom";
 import {
   BrowserRouter,
   Routes,
@@ -7,16 +6,17 @@ import {
 import Home from '../src/pages/Home/Home';
 import Favorites from "./pages/Favorites/Favorites";
 import routes from "../src/constants/routes";
-import './App.scss';
 
 function App() {
   return (
-    <BrowserRouter>
-      <Routes>
-       <Route path={routes.HOME} element={<Home />} />
-       <Route path={routes.FAVORITES}  element={<Favorites />} />
-      </Routes>
-    </BrowserRouter>
+    <div className="app">
+      <BrowserRouter>
+        <Routes>
+         <Route path={routes.HOME} element={<Home />} />
+         <Route path={routes.FAVORITES} element={<Favorites />} />
+        </Routes>
+      </BrowserRouter>
+    </div>
   );
 }
 

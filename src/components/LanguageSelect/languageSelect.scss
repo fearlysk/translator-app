@@ -1,15 +1,25 @@
+@media screen and (max-width: 1080px) {
+    .select-menu {
+        padding: 13px 10px;
+        width: 90% !important;
+        transition: 0.3s;
+        font-size: 0.7em !important;
+        border: 0;
+    }
+}
 .select-menu__wrapper {
-    width: 70%;
+    width: 100%;
 }
 .select-menu {
-    padding: 10px;
-    border: 1px solid black;
-    width: 100%;
+    padding: 13px 10px;
+    width: 20%;
     transition: 0.3s;
     font-size: 1em;
+    border: 0;
+    margin-left: 2%;
 }
 .select-menu:hover {
-    background-color: #a2b9f5;
+    color: #3f6bd9;
     transition: 0.3s;
 }
 .select-menu__option {

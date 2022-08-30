@@ -1,14 +1,12 @@
-.textfield__wrapper {
-    margin-top: 10px;
-}
 .textfield {
     background-color: transparent;
     color: black;
-    border: 1px solid black;
+    border: 0;
+    padding: 5px;
     resize: none;
-    padding: 10px;
     width: 100%;
-    border-radius: 10px;
+    text-indent: 15px;
+    height: 300px;
     outline: none;
     overflow: auto;
     font-size: 28px;
