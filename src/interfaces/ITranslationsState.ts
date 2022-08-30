@@ -3,7 +3,7 @@ export interface ITranslationsState {
    translation: string,
    detectedLanguage: string,
    resentTranslations: string[],
-   favoriteTranslations: {text: string, translation: string}[],
+   favoriteTranslations: {from: string, text: string, to: string, translation: string}[],
    error: string | undefined,
    isFetching: boolean
 }

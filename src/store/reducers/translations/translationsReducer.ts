@@ -46,6 +46,12 @@ export const translationsSlice = createSlice({
    }, 
    addToFavorites: (state, action) => {
       state.favoriteTranslations.push(action.payload);
+   },
+   clearFavoriteTranslations: (state) => {
+      state.favoriteTranslations = [];
+   },
+   removeFavoriteTranslation: (state, action) => {
+      state.favoriteTranslations.splice(action.payload, 1);
    }
   },
   extraReducers: (builder) => {
@@ -83,7 +89,7 @@ export const translationsSlice = createSlice({
   },
 })
 
-export const { setQueryValue, clearTranslation, addToFavorites } = translationsSlice.actions;
+export const { setQueryValue, clearTranslation, addToFavorites, clearFavoriteTranslations, removeFavoriteTranslation } = translationsSlice.actions;
 export const selectCount = (state: RootState) => state.translations.translation;
 
 export default translationsSlice.reducer;

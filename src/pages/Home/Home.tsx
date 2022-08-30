@@ -45,7 +45,9 @@ function Home() {
   const addTranslationToFavorites = () => {
     if(queryText && translation) {
      const favoriteTranslation = {
+        from: inputLanguage,
         text: queryText,
+        to: selectedLanguage,
         translation: translation
     }
      dispatch(addToFavorites(favoriteTranslation));

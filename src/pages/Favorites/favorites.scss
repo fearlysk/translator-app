@@ -1,0 +1,97 @@
+.fav-headline {
+    width: 70%;
+    text-align: left;
+    margin: 20px auto 0 auto;
+    font-family: Arial, Helvetica, sans-serif;
+}
+.fav-wrapper {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin: 30px 0;
+}
+.fav-translation {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 70%;
+    margin: 5px auto;
+    border: 1px solid black;
+    border-top-left-radius: 3px;
+    border-top-right-radius: 3px;
+    padding: 8px 12px;
+    text-align: left;
+    word-wrap: break-word;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    background-color: rgba(242, 242, 242, 0.543);
+}
+.fav-translation__item {
+    border-bottom: 1px solid black;
+    margin: 10px 0;
+}
+.remove-fav {
+    border: 1px solid black;
+    padding: 3px;
+    margin-top: 5px;
+    transition: 0.3s;
+    width: 100%;
+    background-color: rgb(177, 199, 241);
+}
+.remove-fav:hover {
+    background-color: rgb(213, 69, 36);
+    color: white;
+    transition: 0.3s;
+    cursor: pointer;
+}
+.clear-favs {
+    margin: 10px auto;
+    width: 30%;
+}
+.clear-favs-btn {
+    width: 100%;
+    padding: 5px 0;
+    text-align: center;
+    background-color: rgb(177, 199, 241);
+    border-radius: 6px;
+    transition: 0.3s;
+}
+.clear-favs-btn:hover {
+    background-color: rgb(213, 69, 36);
+    color: white;
+    transition: 0.3s;
+    cursor: pointer;
+}
+.fav-options {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    margin-top: 10px;
+    width: 100%;
+}
+.fav-goBack__wrapper {
+    display: flex;
+    justify-content: center;
+    margin-top: 15px;
+}
+.fav-goBack {
+    padding: 10px;
+    border: 1px solid black;
+    border-radius: 2px;
+    color: black;
+    text-decoration: none;
+    transition: 0.3s;
+    margin: 0 auto;
+}
+.fav-goBack:hover {
+    background-color: rgb(177, 199, 241);
+    transition: 0.3s;
+}
+.no-favs {
+    text-align: center;
+    margin-top: 60px;
+}
+.fav-lang {
+    text-transform: uppercase;
+    color: rgb(93, 143, 236);
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}
