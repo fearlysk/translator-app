@@ -1,19 +1,20 @@
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { useAppSelector, useAppDispatch } from '../../../src/store/hooks';
-import { clearTranslation, fetchData, addToFavorites } from "../../store/reducers/translations/translationsReducer";
+import { clearTranslation, fetchData, addToFavorites, addToRecentTranslations } from "../../store/reducers/translations/translationsReducer";
 import { IFetchQueries } from "../../../src/interfaces/IFetchQueries";
 import TextField from '../../components/TextField/TextField';
 import TextFieldSkeleton from "../../components/TextFieldSkeleton/TextFieldSkeleton";
 import LanguageSelect from "../../components/LanguageSelect/LanguageSelect";
 import Arrows from "../../components/Arrows/Arrows";
-import Copy from "../../components/Copy/Copy";
+import Copy from "../../components/Copy/CopyIcon/Copy";
 import CopiedPopUp from "../../components/Copy/CopiedPopUp/CopiedPopUp";
 import AddToFavPopUp from "../../components/AddToFavPopUp/AddToFavPopUp";
+import { IPageProps } from "../../interfaces/IPageProps";
 import './home.scss';
 import 'react-loading-skeleton/dist/skeleton.css';
 
-function Home() {
+function Home({darkMode}: IPageProps) {
 
   const translation = useAppSelector((state) => state.translations.translation);
   const detectedLanguage = useAppSelector((state) => state.translations.detectedLanguage);
@@ -56,37 +57,49 @@ function Home() {
     }
   }
 
+  const addTranslationToRecent = () => {
+    if(queryText && translation) {
+      const recentTranslation = {
+         from: inputLanguage,
+         text: queryText,
+         to: selectedLanguage,
+         translation: translation
+      }
+      dispatch(addToRecentTranslations(recentTranslation));
+    }
+  }
+
   useEffect(() => {
   const delayDebounceFn = setTimeout(() => {
     setQueryText(queryText);
     if(queryText !== "") {
-        dispatch(fetchData(params));
+      dispatch(fetchData(params));
+      addTranslationToRecent();
     } else {
       dispatch(clearTranslation());
     }
-   
-  }, 500)
-  
+  }, 700)
+
    return () => clearTimeout(delayDebounceFn)
-  }, [queryText, selectedLanguage])
+  }, [queryText, selectedLanguage, translation])
 
   return (
     <div className="wrapper">
        
       <div className="fields__wrapper">
-  
+ 
         <div className="options-field">
-          <LanguageSelect selectedLanguage={inputLanguage} setSelectedLanguage={setInputLanguage} />
-          <button className="options-field__fav" onClick={() => switchLanguages()}><Arrows /></button>
-          <LanguageSelect selectedLanguage={selectedLanguage} setSelectedLanguage={setSelectedLanguage} />
+          <LanguageSelect selectedLanguage={inputLanguage} setSelectedLanguage={setInputLanguage} darkMode={darkMode} />
+          <button className="options-field__fav" onClick={() => switchLanguages()}><Arrows darkMode={darkMode} /></button>
+          <LanguageSelect selectedLanguage={selectedLanguage} setSelectedLanguage={setSelectedLanguage} darkMode={darkMode} />
         </div>
 
         <div className="translation-fields">
           <div className="translation-field">
-            <TextField queryText={queryText} setQueryText={setQueryText} disabled={false} placeholder=" Text to translate..." /> 
+            <TextField queryText={queryText} setQueryText={setQueryText} disabled={false} placeholder=" Text to translate..."  darkMode={darkMode} /> 
           </div>
           <div className="translation-field__output">
-            {queryText && !translation ? <TextFieldSkeleton /> : <TextField queryText={translation} setQueryText={setQueryText} disabled={true} placeholder=" Translation..."/>}
+            {queryText && !translation ? <TextFieldSkeleton /> : <TextField queryText={translation} setQueryText={setQueryText} disabled={true} placeholder=" Translation..."  darkMode={darkMode} />}
           </div>
         </div>
 
@@ -95,16 +108,17 @@ function Home() {
         <div className="secondary-options-field">
           
           <div>
-             <Link className="fav-link" to="favorites">View favorite translations &#9733;</Link>
-             {translation && queryText ? <span className="detected-lang">Language: {detectedLanguage}</span> : null}
+             <Link className={darkMode ? "fav-link__dark" : "fav-link"} to="favorites">View favorite translations &#9733;</Link>
+             <Link className={darkMode ? "history-link__dark" : "history-link"} to="history">View history &#x270E;</Link>
+             {translation && queryText ? <span className={darkMode ? "detected-lang__dark" : "detected-lang"}>Language: {detectedLanguage}</span> : null}
           </div>
           
           {addedToFavPopUp ? <div className="secondary-options-field__added-to-fav"><AddToFavPopUp /></div> : null}
-          {queryText && translation ? <div><button className="add-to-fav" onClick={() => addTranslationToFavorites()}>Add to favorites</button></div> : null}
+          {queryText && translation ? <div><button className={darkMode ? "add-to-fav__dark" : "add-to-fav"} onClick={() => addTranslationToFavorites()}>Add to favorites</button></div> : null}
           
           <div className="secondary-options-field__copy--wrapper">
             {copiedPopUp ? <div className="secondary-options-field__copied"><CopiedPopUp /></div> : null }
-            <div><button className="secondary-options-field__copy" onClick={() => copyToClipboard()}><Copy /></button></div>
+            <div><button className="secondary-options-field__copy" onClick={() => copyToClipboard()}><Copy darkMode={darkMode} /></button></div>
           </div>
         
         </div>

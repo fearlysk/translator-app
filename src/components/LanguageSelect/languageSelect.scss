@@ -9,8 +9,20 @@
 }
 .select-menu__wrapper {
     width: 100%;
+    
+}
+.select-menu__dark {
+    background-color: transparent;
+    color: white;
+    padding: 13px 10px;
+    width: 20%;
+    transition: 0.3s;
+    font-size: 1em;
+    border: 0;
+    margin-left: 2%;
 }
 .select-menu {
+    background-color: transparent;
     padding: 13px 10px;
     width: 20%;
     transition: 0.3s;
@@ -21,6 +33,9 @@
 .select-menu:hover {
     color: #3f6bd9;
     transition: 0.3s;
+}
+.select-menu__dark:hover {
+    color: rgb(133, 171, 235);
 }
 .select-menu__option {
     background-color: white;

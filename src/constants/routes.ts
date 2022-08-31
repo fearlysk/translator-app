@@ -1,6 +1,7 @@
 const routes = {
   HOME: "/",
-  FAVORITES: "favorites"
+  FAVORITES: "favorites",
+  HISTORY: "history"
 };
   
 export default routes;

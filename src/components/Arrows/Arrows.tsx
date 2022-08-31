@@ -1,6 +1,10 @@
-const Arrows = () => {
+import { IDarkMode } from "../../interfaces/IDarkMode";
+import "./arrows.scss";
+
+const Arrows = ({darkMode}: IDarkMode) => {
     return (
       <svg
+        className={darkMode ? "arrows-dark" : "arrows-light"}
         width="60"
         height="40"
         focusable="false"

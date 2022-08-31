@@ -7,10 +7,10 @@ const initialState: ITranslationsState = {
   queryValue: '',
   translation: '',
   detectedLanguage: '',
-  resentTranslations: [],
+  recentTranslations: [],
   favoriteTranslations: [],
   error: '',
-  isFetching: false
+  isFetching: false,
 }
 
 export const fetchData = (createAsyncThunk("data/fetchData", async (queries: IFetchQueries) => {
@@ -43,16 +43,25 @@ export const translationsSlice = createSlice({
    clearTranslation: (state) => {
       state.translation = "";
       state.detectedLanguage = "";
-   }, 
+    },
+   addToRecentTranslations: (state, action) => {
+      state.recentTranslations.push(action.payload);
+    },
    addToFavorites: (state, action) => {
       state.favoriteTranslations.push(action.payload);
-   },
+     },
+   clearRecentTranslations: (state) => {
+      state.recentTranslations = [];
+    },
    clearFavoriteTranslations: (state) => {
       state.favoriteTranslations = [];
-   },
+    },
+   removeRecentTranslation: (state, action) => {
+      state.recentTranslations.splice(action.payload, 1);
+    },
    removeFavoriteTranslation: (state, action) => {
       state.favoriteTranslations.splice(action.payload, 1);
-   }
+    }
   },
   extraReducers: (builder) => {
     builder.addCase(fetchData.pending, (state) => {
@@ -89,7 +98,7 @@ export const translationsSlice = createSlice({
   },
 })
 
-export const { setQueryValue, clearTranslation, addToFavorites, clearFavoriteTranslations, removeFavoriteTranslation } = translationsSlice.actions;
+export const { setQueryValue, clearTranslation, addToFavorites, clearFavoriteTranslations, removeFavoriteTranslation, addToRecentTranslations, removeRecentTranslation, clearRecentTranslations } = translationsSlice.actions;
 export const selectCount = (state: RootState) => state.translations.translation;
 
 export default translationsSlice.reducer;

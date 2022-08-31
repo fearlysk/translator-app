@@ -1,11 +1,11 @@
 import { ILanguageSelectProps } from "../../interfaces/ILanguageSelectProps";
 import "./languageSelect.scss";
 
-const LanguageSelect = ({selectedLanguage, setSelectedLanguage}: ILanguageSelectProps) => {
+const LanguageSelect = ({selectedLanguage, setSelectedLanguage, darkMode}: ILanguageSelectProps) => {
     return (
         <div className="select-menu__wrapper">
             <select   
-              className="select-menu"
+              className={darkMode ? "select-menu__dark" : "select-menu"}
               value={selectedLanguage}
               onChange={(e) => setSelectedLanguage(e.target.value)}>
                 <option className="select-menu__option" value="ru">Russian</option>

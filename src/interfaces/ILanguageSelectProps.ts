@@ -1,4 +1,5 @@
 export interface ILanguageSelectProps {
     selectedLanguage: string,
-    setSelectedLanguage(value: string): void
+    setSelectedLanguage(value: string): void,
+    darkMode: boolean
 }
