@@ -84,7 +84,7 @@ function Home({darkMode}: IPageProps) {
   }, [queryText, selectedLanguage, translation])
 
   return (
-    <div className="wrapper">
+    <div className={darkMode ? "wrapper__dark" : "wrapper"}>
        
       <div className="fields__wrapper">
  
@@ -107,10 +107,10 @@ function Home({darkMode}: IPageProps) {
         
         <div className="secondary-options-field">
           
-          <div>
-             <Link className={darkMode ? "fav-link__dark" : "fav-link"} to="favorites">View favorite translations &#9733;</Link>
-             <Link className={darkMode ? "history-link__dark" : "history-link"} to="history">View history &#x270E;</Link>
-             {translation && queryText ? <span className={darkMode ? "detected-lang__dark" : "detected-lang"}>Language: {detectedLanguage}</span> : null}
+          <div className="secondary-options">
+             <div><Link className={darkMode ? "fav-link__dark" : "fav-link"} to="favorites">View favorite translations &#9733;</Link></div>
+             <div><Link className={darkMode ? "history-link__dark" : "history-link"} to="history">View history &#x270E;</Link></div>
+             <div>{translation && queryText ? <span className={darkMode ? "detected-lang__dark" : "detected-lang"}>Language: {detectedLanguage}</span> : null}</div>
           </div>
           
           {addedToFavPopUp ? <div className="secondary-options-field__added-to-fav"><AddToFavPopUp /></div> : null}
@@ -123,8 +123,8 @@ function Home({darkMode}: IPageProps) {
         
         </div>
         
-          {/[a-zA-Z]/.test(queryText) && inputLanguage === "ru" ? <div className="switch-lang-tooltip"><h3>Your keyboard layout differs from selected language: <button className="switch-btn" onClick={() => switchLanguages()}>Switch</button></h3></div> : null}
-          {/[а-яА-Я]/.test(queryText) && inputLanguage !== "ru" ? <div className="switch-lang-tooltip"><h3>Your keyboard layout differs from selected language: <button className="switch-btn" onClick={() => switchLanguages()}>Switch</button></h3></div> : null}
+          {/[a-zA-Z]/.test(queryText) && inputLanguage === "ru" ? <div className={darkMode ? "switch-lang-tooltip__dark" : "switch-lang-tooltip"}><h3> &#x2757; Your keyboard layout differs from selected language: <button className={darkMode ? "switch-btn__dark" : "switch-btn"} onClick={() => switchLanguages()}>Switch</button></h3></div> : null}
+          {/[а-яА-Я]/.test(queryText) && inputLanguage !== "ru" ? <div className={darkMode ? "switch-lang-tooltip__dark" : "switch-lang-tooltip"}><h3> &#x2757; Your keyboard layout differs from selected language: <button className={darkMode ? "switch-btn__dark" : "switch-btn"} onClick={() => switchLanguages()}>Switch</button></h3></div> : null}
       
     </div>
   );

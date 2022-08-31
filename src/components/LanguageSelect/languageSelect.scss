@@ -30,6 +30,16 @@
     border: 0;
     margin-left: 2%;
 }
+@media screen and (max-width: 1500px) {
+    .select-menu, .select-menu__dark {
+        width: 30%;
+    }
+}
+@media screen and (max-width: 1095px) {
+    .select-menu, .select-menu__dark {
+        width: 95%;
+    }
+}
 .select-menu:hover {
     color: #3f6bd9;
     transition: 0.3s;
