@@ -99,7 +99,7 @@ function Home({darkMode}: IPageProps) {
             <TextField queryText={queryText} setQueryText={setQueryText} disabled={false} placeholder=" Text to translate..."  darkMode={darkMode} /> 
           </div>
           <div className="translation-field__output">
-            {queryText && !translation ? <TextFieldSkeleton /> : <TextField queryText={translation} setQueryText={setQueryText} disabled={true} placeholder=" Translation..."  darkMode={darkMode} />}
+            {queryText && !translation ? <TextFieldSkeleton darkMode={darkMode} /> : <TextField queryText={translation} setQueryText={setQueryText} disabled={true} placeholder=" Translation..."  darkMode={darkMode} />}
           </div>
         </div>
 

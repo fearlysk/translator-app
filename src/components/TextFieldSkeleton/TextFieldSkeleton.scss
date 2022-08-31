@@ -1,4 +1,4 @@
-.textfield-skeleton {
+.textfield-skeleton, .textfield-skeleton__dark {
     background-color: transparent;
     border: 0;
     padding: 5px;
@@ -7,4 +7,7 @@
     height: 300px;
     outline: none;
     overflow: auto;
+}
+.textfield-skeleton__dark {
+    opacity: 0.1;
 }
