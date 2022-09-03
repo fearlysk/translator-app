@@ -2,19 +2,11 @@ import { Link } from "react-router-dom";
 import { useAppSelector, useAppDispatch } from '../../../src/store/hooks';
 import { clearFavoriteTranslations, removeFavoriteTranslation } from "../../store/reducers/translations/translationsReducer";
 import { IPageProps } from "../../interfaces/IPageProps";
-import { ITranslation } from "../../interfaces/ITranslation";
 import './favorites.scss';
 
 const Favorites = ({darkMode}: IPageProps) => {
 
     const favorites = useAppSelector((state) => state.translations.favoriteTranslations);
-
-    const uniqueFavorites = favorites.reduce((unique: Array<ITranslation>, o) => {
-      if(!unique.some(obj => obj.text === o.text && obj.translation === o.translation)) {
-        unique.push(o);
-      }
-      return unique;
-    }, []);
 
     const dispatch = useAppDispatch()
 
@@ -33,7 +25,7 @@ const Favorites = ({darkMode}: IPageProps) => {
           {favorites.length ? <h1 className="fav-headline">Favorite Translations</h1> : null}
           {!favorites.length ? <h2 className="no-favs">No favorite translations</h2> : null}
           <div className="fav-wrapper">
-              {uniqueFavorites.map((item, index) => 
+              {favorites.map((item, index) => 
               <div key={index}>
                 <div className="fav-translation">
                   <div className="fav-translation__header">

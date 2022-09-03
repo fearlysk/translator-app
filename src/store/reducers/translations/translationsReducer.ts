@@ -1,3 +1,4 @@
+import _, { map } from 'underscore';
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import type { RootState } from '../../store';
 import { IFetchQueries } from "../../../interfaces/IFetchQueries";
@@ -46,10 +47,14 @@ export const translationsSlice = createSlice({
       state.detectedLanguage = "";
     },
    addToRecentTranslations: (state, action) => {
+    if (_.findWhere(state.recentTranslations, action.payload) == null) {
       state.recentTranslations.unshift(action.payload);
+    }
     },
    addToFavorites: (state, action) => {
-      state.favoriteTranslations.unshift(action.payload);
+    if (_.findWhere(state.favoriteTranslations, action.payload) == null) {
+       state.favoriteTranslations.unshift(action.payload);
+    }
     }, 
    clearRecentTranslations: (state) => {
       state.recentTranslations = [];

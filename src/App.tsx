@@ -1,6 +1,6 @@
 import { useState } from "react";
 import {
-  BrowserRouter,
+  HashRouter,
   Routes,
   Route,
 } from "react-router-dom";
@@ -26,13 +26,13 @@ function App() {
         </div>
         <span className="toggle-icon" style={{ color: darkMode ? "#c96dfd" : "grey" }}>☽</span>
       </div>
-      <BrowserRouter>
+      <HashRouter>
         <Routes>
          <Route path={routes.HOME} element={<Home darkMode={darkMode}/>} />
          <Route path={routes.FAVORITES} element={<Favorites darkMode={darkMode} />} />
          <Route path={routes.HISTORY} element={<History darkMode={darkMode} />} />
         </Routes>
-      </BrowserRouter>
+      </HashRouter>
     </div>
   );
 }

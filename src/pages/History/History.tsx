@@ -2,19 +2,11 @@ import { Link } from "react-router-dom";
 import { useAppSelector, useAppDispatch } from '../../../src/store/hooks';
 import { clearRecentTranslations, removeRecentTranslation } from "../../store/reducers/translations/translationsReducer";
 import { IPageProps } from "../../interfaces/IPageProps";
-import { ITranslation } from "../../interfaces/ITranslation";
 import './history.scss';
 
 const History = ({darkMode}: IPageProps) => {
 
     const history = useAppSelector((state) => state.translations.recentTranslations);
-    
-    const uniqueHistoryItems = history.reduce((unique: Array<ITranslation>, o) => {
-      if(!unique.some(obj => obj.text === o.text && obj.translation === o.translation)) {
-        unique.push(o);
-      }
-      return unique;
-    }, []);
 
     const dispatch = useAppDispatch()
 
@@ -33,7 +25,7 @@ const History = ({darkMode}: IPageProps) => {
         {history.length ? <h1 className="history-headline">History of translations</h1> : null}
         {!history.length ? <h2 className="no-history">No translations</h2> : null}
         <div className="history-wrapper">
-            {uniqueHistoryItems.map((item, index) => 
+            {history.map((item, index) => 
             <div key={index}>
               <div className="history-translation">
                 <div className="history-translation__header">
