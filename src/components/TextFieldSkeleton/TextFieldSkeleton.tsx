@@ -5,7 +5,7 @@ import "./TextFieldSkeleton.scss";
 const TextFieldSkeleton = ({darkMode}: IDarkMode) => {
     return (
       <div className={darkMode ? "textfield-skeleton__dark" : "textfield-skeleton"}>  
-        <Skeleton count={8} height={34}/>
+        <Skeleton count={10} height={37}/>
       </div>
     )
 }

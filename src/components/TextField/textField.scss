@@ -5,7 +5,7 @@
     resize: none;
     width: 100%;
     text-indent: 15px;
-    height: 300px;
+    height: 400px;
     outline: none;
     overflow: auto;
     font-size: 28px;
@@ -15,4 +15,9 @@
 }
 .textfield__dark {
     color: white;
+}
+@media screen and (max-width: 600px) {
+    .textfield, .textfield__dark {
+        height: 200px;
+    }
 }

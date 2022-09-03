@@ -3,7 +3,7 @@ import "./copy.scss";
 
 const Copy = ({darkMode}: IDarkMode) => {
     return (
-      <svg viewBox="0 0 24 24" 
+      <svg viewBox="0 0 24 22" 
         className={darkMode ? "copy-dark" : "copy-light"}
         width="50"
         height="30"

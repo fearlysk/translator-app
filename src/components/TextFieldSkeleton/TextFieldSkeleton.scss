@@ -1,13 +1,19 @@
 .textfield-skeleton, .textfield-skeleton__dark {
     background-color: transparent;
     border: 0;
-    padding: 5px;
+    padding: 11px 5px;
+    margin: 1px auto;
     resize: none;
-    width: 96%;
-    height: 300px;
+    width: 98%;
+    height: 400px;
     outline: none;
     overflow: auto;
 }
 .textfield-skeleton__dark {
     opacity: 0.1;
+}
+@media screen and (max-width: 600px) {
+    .textfield-skeleton, .textfield-skeleton__dark {
+        height: 200px;
+    }
 }

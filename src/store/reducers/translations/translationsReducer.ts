@@ -1,4 +1,4 @@
-import { createSlice, createAsyncThunk } from '@reduxjs/toolkit'
+import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import type { RootState } from '../../store';
 import { IFetchQueries } from "../../../interfaces/IFetchQueries";
 import { ITranslationsState } from '../../../interfaces/ITranslationsState';
@@ -9,8 +9,9 @@ const initialState: ITranslationsState = {
   detectedLanguage: '',
   recentTranslations: [],
   favoriteTranslations: [],
+  languages: [],
   error: '',
-  isFetching: false,
+  isFetching: false
 }
 
 export const fetchData = (createAsyncThunk("data/fetchData", async (queries: IFetchQueries) => {
@@ -30,8 +31,8 @@ export const fetchData = (createAsyncThunk("data/fetchData", async (queries: IFe
         .catch(err => console.error(err));
 
     return data;
-}))
 
+  }))
 
 export const translationsSlice = createSlice({
   name: 'translations',
@@ -45,11 +46,11 @@ export const translationsSlice = createSlice({
       state.detectedLanguage = "";
     },
    addToRecentTranslations: (state, action) => {
-      state.recentTranslations.push(action.payload);
+      state.recentTranslations.unshift(action.payload);
     },
    addToFavorites: (state, action) => {
-      state.favoriteTranslations.push(action.payload);
-     },
+      state.favoriteTranslations.unshift(action.payload);
+    }, 
    clearRecentTranslations: (state) => {
       state.recentTranslations = [];
     },
@@ -63,7 +64,7 @@ export const translationsSlice = createSlice({
       state.favoriteTranslations.splice(action.payload, 1);
     }
   },
-  extraReducers: (builder) => {
+  extraReducers: (builder) => {   
     builder.addCase(fetchData.pending, (state) => {
       state.isFetching = true;
     })
@@ -72,27 +73,9 @@ export const translationsSlice = createSlice({
       state.error = '';
       state.translation = action.payload[0].translations[0].text;
       state.detectedLanguage = action.payload[0].detectedLanguage.language;
-      switch (state.detectedLanguage) {
-        case "en":
-          state.detectedLanguage = "English";
-          break;
-        case "ru":
-          state.detectedLanguage = "Russian";
-          break;  
-        case "it":
-          state.detectedLanguage = "Italian";
-          break;  
-        case "de":
-          state.detectedLanguage = "Deutsch";
-          break;  
-        case "es":
-          state.detectedLanguage = "Espanol";
-          break;
-        default:
-          state.detectedLanguage = "Unknown";
-      }
     })
     builder.addCase(fetchData.rejected, (state, action) => {
+      state.isFetching = false;
       state.error = action.error.message;
     })
   },
