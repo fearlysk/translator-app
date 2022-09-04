@@ -99,15 +99,14 @@ function Home({darkMode}: IPageProps) {
 
   return (
     <div className={darkMode ? "wrapper__dark" : "wrapper"}>
-       
+       {/[a-zA-Z]/.test(queryText) && inputLanguage === "ru" && detectedLanguage ? <div className={darkMode ? "switch-lang-tooltip__dark" : "switch-lang-tooltip"}><h3> &#x2757; Detected language: {detectedLanguage.toUpperCase()} <button className={darkMode ? "switch-btn__dark" : "switch-btn"} onClick={() => setDetectedLanguage()}>Switch</button></h3></div> : null}
+        {/[а-яА-Я]/.test(queryText) && inputLanguage !== "ru" && detectedLanguage ? <div className={darkMode ? "switch-lang-tooltip__dark" : "switch-lang-tooltip"}><h3> &#x2757; Detected language: {detectedLanguage.toUpperCase()} <button className={darkMode ? "switch-btn__dark" : "switch-btn"} onClick={() => setDetectedLanguage()}>Switch</button></h3></div> : null}  
       <div className="fields__wrapper">
- 
         <div className="options-field">
           <LanguageSelect selectedLanguage={inputLanguage} setSelectedLanguage={setInputLanguage} darkMode={darkMode} detectLangOption={true} />
           <button className="options-field__switch" onClick={() => switchLanguages()}><Arrows darkMode={darkMode} /></button>
           <LanguageSelect selectedLanguage={selectedLanguage} setSelectedLanguage={setSelectedLanguage} darkMode={darkMode} detectLangOption={false} />
         </div>
-
         <div className="translation-fields">
           <div className={darkMode ? "translation-field__dark" : "translation-field"}>
             <TextField queryText={queryText} setQueryText={setQueryText} disabled={false} placeholder=" Text to translate..."  darkMode={darkMode} /> 
@@ -116,33 +115,25 @@ function Home({darkMode}: IPageProps) {
             {queryText && !translation ? <TextFieldSkeleton darkMode={darkMode} /> : <TextField queryText={translation} setQueryText={setQueryText} disabled={true} placeholder=" Translation..."  darkMode={darkMode} />}
           </div>
         </div>
-
       </div>
-        
         <div className="secondary-options-field">
-          
           <div className="secondary-options">
-             
-          <div className="secondary-options__item">
-            <div className="secondary-options__item-first">
-              <div className="secondary-options__view"><Link className={darkMode ? "fav-link__dark" : "fav-link"} to="favorites">View favorite translations &#9733;</Link></div>
-              <div className="secondary-options__view"><Link className={darkMode ? "history-link__dark" : "history-link"} to="history">View history &#x270E;</Link></div>
+            <div className="secondary-options__item">
+              <div className="secondary-options__item-first">
+                <div className="secondary-options__view"><Link className={darkMode ? "fav-link__dark" : "fav-link"} to="favorites">View favorite translations &#9733;</Link></div>
+                <div className="secondary-options__view"><Link className={darkMode ? "history-link__dark" : "history-link"} to="history">View history &#x270E;</Link></div>
+              </div>
             </div>
-          </div>
-          
-          <div className="secondary-options__item">
-            <div className="secondary-options__item-second">
-              {addedToFavPopUp ? <div className="secondary-options-field__added-to-fav"><AddToFavPopUp /></div> : null}
-              {queryText && translation ? <div><button className={darkMode ? "add-to-fav__dark" : "add-to-fav"} onClick={() => addTranslationToFavorites()}>Add to favorites</button></div> : null}
-              {copiedPopUp ? <div className="secondary-options-field__copied"><CopiedPopUp /></div> : null }
-            <div><button className="secondary-options-field__copy" onClick={() => copyToClipboard()}><Copy darkMode={darkMode} /></button></div>
-            </div>
-           </div>
+            <div className="secondary-options__item">
+              <div className="secondary-options__item-second">
+                {addedToFavPopUp ? <div className="secondary-options-field__added-to-fav"><AddToFavPopUp /></div> : null}
+                {queryText && translation ? <div><button className={darkMode ? "add-to-fav__dark" : "add-to-fav"} onClick={() => addTranslationToFavorites()}>Add to favorites</button></div> : null}
+                {copiedPopUp ? <div className="secondary-options-field__copied"><CopiedPopUp /></div> : null }
+              <div><button className="secondary-options-field__copy" onClick={() => copyToClipboard()}><Copy darkMode={darkMode} /></button></div>
+              </div>
+             </div>
           </div>
         </div>
-        
-          {/[a-zA-Z]/.test(queryText) && inputLanguage === "ru" && detectedLanguage ? <div className={darkMode ? "switch-lang-tooltip__dark" : "switch-lang-tooltip"}><h3> &#x2757; Detected language: {detectedLanguage.toUpperCase()} <button className={darkMode ? "switch-btn__dark" : "switch-btn"} onClick={() => setDetectedLanguage()}>Switch</button></h3></div> : null}
-          {/[а-яА-Я]/.test(queryText) && inputLanguage !== "ru" && detectedLanguage ? <div className={darkMode ? "switch-lang-tooltip__dark" : "switch-lang-tooltip"}><h3> &#x2757; Detected language: {detectedLanguage.toUpperCase()} <button className={darkMode ? "switch-btn__dark" : "switch-btn"} onClick={() => setDetectedLanguage()}>Switch</button></h3></div> : null}  
     
     </div>
   );
