@@ -69,7 +69,7 @@ function Home({darkMode}: IPageProps) {
     if(queryText && translation && detectedLanguage !== selectedLanguage) {
       const recentTranslation: ITranslation = {
          from: detectedLanguage,
-         text: queryText,
+         text: queryText.trim(),
          to: selectedLanguage,
          translation: translation
       }
@@ -79,29 +79,25 @@ function Home({darkMode}: IPageProps) {
 
   useEffect(() => {
   const delayDebounceFn = setTimeout(() => {
-    setQueryText(queryText);
-    
-   if(queryText && detectedLanguage && !langsSwitching && inputLanguage === "define") {
+  setQueryText(queryText);
+   if(queryText && detectedLanguage && !langsSwitching && inputLanguage === "detect") {
     setInputLanguage(detectedLanguage);
    }
-    if(queryText !== "") {
+    if(queryText.trim()) {
       dispatch(fetchData(params));
-        setTimeout(() => {
-         addTranslationToRecent();
-        }, 1500)
+      addTranslationToRecent();
     } else {
       dispatch(clearTranslation());
     }
-  }, 700)
+  }, 300)
 
    return () => clearTimeout(delayDebounceFn)
   }, [queryText, selectedLanguage, translation, detectedLanguage, inputLanguage])
 
   return (
     <div className={darkMode ? "wrapper__dark" : "wrapper"}>
-       {/[a-zA-Z]/.test(queryText) && inputLanguage === "ru" && detectedLanguage ? <div className={darkMode ? "switch-lang-tooltip__dark" : "switch-lang-tooltip"}><h3> &#x2757; Detected language: {detectedLanguage.toUpperCase()} <button className={darkMode ? "switch-btn__dark" : "switch-btn"} onClick={() => setDetectedLanguage()}>Switch</button></h3></div> : null}
-        {/[а-яА-Я]/.test(queryText) && inputLanguage !== "ru" && detectedLanguage ? <div className={darkMode ? "switch-lang-tooltip__dark" : "switch-lang-tooltip"}><h3> &#x2757; Detected language: {detectedLanguage.toUpperCase()} <button className={darkMode ? "switch-btn__dark" : "switch-btn"} onClick={() => setDetectedLanguage()}>Switch</button></h3></div> : null}  
-      <div className="fields__wrapper">
+      {translation && inputLanguage !== detectedLanguage && inputLanguage !== "detect" ? <div className={darkMode ? "switch-lang-tooltip__dark" : "switch-lang-tooltip"}><h3> &#x2757; Detected language: {detectedLanguage.toUpperCase()} <button className={darkMode ? "switch-btn__dark" : "switch-btn"} onClick={() => setDetectedLanguage()}>Switch</button></h3></div> : null}
+     <div className="fields__wrapper">
         <div className="options-field">
           <LanguageSelect selectedLanguage={inputLanguage} setSelectedLanguage={setInputLanguage} darkMode={darkMode} detectLangOption={true} />
           <button className="options-field__switch" onClick={() => switchLanguages()}><Arrows darkMode={darkMode} /></button>
@@ -112,7 +108,7 @@ function Home({darkMode}: IPageProps) {
             <TextField queryText={queryText} setQueryText={setQueryText} disabled={false} placeholder=" Text to translate..."  darkMode={darkMode} /> 
           </div>
           <div className="translation-field__output">
-            {queryText && !translation ? <TextFieldSkeleton darkMode={darkMode} /> : <TextField queryText={translation} setQueryText={setQueryText} disabled={true} placeholder=" Translation..."  darkMode={darkMode} />}
+            {queryText.trim() && !translation ? <TextFieldSkeleton darkMode={darkMode} /> : <TextField queryText={translation} setQueryText={setQueryText} disabled={true} placeholder=" Translation..."  darkMode={darkMode} />}
           </div>
         </div>
       </div>

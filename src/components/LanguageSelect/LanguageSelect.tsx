@@ -9,7 +9,7 @@ const LanguageSelect = ({selectedLanguage, setSelectedLanguage, darkMode, detect
           className={darkMode ? "select-menu__dark" : "select-menu"}
           value={selectedLanguage}
           onChange={(e) => setSelectedLanguage(e.target.value)}>
-            {detectLangOption ? <option className="select-menu__option" value="define">Define language</option> : null}
+            {detectLangOption ? <option className="select-menu__option" value="detect">Detect language</option> : null}
             <option className="select-menu__option" value="ru">Russian</option>
             <option className="select-menu__option" value="en">English</option>
             <option className="select-menu__option" value="de">Deutsch</option>
