@@ -7,5 +7,6 @@ export interface ITextFieldProps {
     inputField: boolean,
     setCopiedPopUp(value: boolean): void,
     setAddedToFavPopUp(value: boolean): void,
-    selectedLanguage: string
+    selectedLanguage: string,
+    addTranslationToFavorites?(): void
 }

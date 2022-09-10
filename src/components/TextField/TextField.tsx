@@ -6,12 +6,12 @@ import { ITextFieldProps } from "../../interfaces/ITextFieldProps";
 import { ITranslation } from "../../interfaces/ITranslation";
 import "./textField.scss";
 
-const TextField = ({queryText, setQueryText, disabled, placeholder, darkMode, inputField, setCopiedPopUp, setAddedToFavPopUp, selectedLanguage}: ITextFieldProps) => {
+const TextField = ({queryText, setQueryText, disabled, placeholder, darkMode, inputField, setCopiedPopUp, setAddedToFavPopUp, selectedLanguage, addTranslationToFavorites}: ITextFieldProps) => {
 
   const translation = useAppSelector((state) => state.translations.translation);
   const detectedLanguage = useAppSelector((state) => state.translations.detectedLanguage);
   const dispatch = useAppDispatch();
-  
+
   const maxLength = 1000;
 
   const clearInput = () => {
@@ -24,19 +24,21 @@ const TextField = ({queryText, setQueryText, disabled, placeholder, darkMode, in
     setTimeout(() => setCopiedPopUp(false), 1000);
   }
 
-  const addTranslationToFavorites = () => {
-    if(queryText && translation && detectedLanguage !== selectedLanguage) {
-     const favoriteTranslation: ITranslation = {
-        from: detectedLanguage,
-        text: queryText,
-        to: selectedLanguage,
-        translation: translation
-    }
-     dispatch(addToFavorites(favoriteTranslation));
-     setAddedToFavPopUp(true);
-     setTimeout(() => setAddedToFavPopUp(false), 1000);
-    }
-  }
+  // const addTranslationToFavorites = () => {
+  //   if(queryText && translation && detectedLanguage !== selectedLanguage) {
+  //    const favoriteTranslation: ITranslation = {
+  //       from: detectedLanguage,
+  //       text: queryText,
+  //       to: selectedLanguage,
+  //       translation: translation
+  //   }
+  //   console.log("text :", queryText);
+  //   console.log("tra: ", translation);
+  //    dispatch(addToFavorites(favoriteTranslation));
+  //    setAddedToFavPopUp(true);
+  //    setTimeout(() => setAddedToFavPopUp(false), 1000);
+  //   }
+  // }
 
     return (
       <div>
@@ -60,7 +62,7 @@ const TextField = ({queryText, setQueryText, disabled, placeholder, darkMode, in
         
         {!inputField ? 
           <div className="textfield__options">
-            {queryText && translation ?  <div className="textfield__options-btn"><button className={darkMode ? "action-btn__dark" : "action-btn"} onClick={() => addTranslationToFavorites()}><Star /></button></div> : null }
+            {queryText && translation ? <div className="textfield__options-btn"><button className={darkMode ? "action-btn__dark" : "action-btn"} onClick={addTranslationToFavorites}><Star /></button></div> : null }
             <div className="textfield__options-btn"><button className={darkMode ? "action-btn__dark" : "action-btn"} onClick={() => copyToClipboard()}><Copy /></button></div>
           </div>
         : null}

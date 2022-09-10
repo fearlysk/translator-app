@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import ArrowLeft from "../../components/UI/ArrowLeft/ArrowLeft";
 import { useAppSelector, useAppDispatch } from '../../../src/store/hooks';
 import { clearFavoriteTranslations, removeFavoriteTranslation } from "../../store/reducers/translations/translationsReducer";
 import { IPageProps } from "../../interfaces/IPageProps";
@@ -20,10 +21,9 @@ const Favorites = ({darkMode}: IPageProps) => {
 
     return (
       <div className={darkMode ? "favorites-page-wrapper__dark" : "favorites-page-wrapper"}>
-        <div className="fields-favorites__wrapper">
-        <div className="fav-goBack__wrapper"><div><Link className="fav-goBack" to="/">&larr; Go back</Link></div></div>
-        {favorites.length ? <div className={darkMode ? "fav-headline__wrapper__dark" : "fav-headline__wrapper" }><h1 className="fav-headline">Favorite Translations</h1></div> : null}
-        {!favorites.length ? <div className={darkMode ? "fav-headline__wrapper__dark" : "fav-headline__wrapper" }><h2 className="no-favs">No favorite translations</h2></div> : null}
+        <div className={darkMode ? "fields-favorites__wrapper__dark" : "fields-favorites__wrapper" }>
+        {favorites.length ? <div className={darkMode ? "fav-headline__wrapper__dark" : "fav-headline__wrapper" }><div><Link className="fav-goBack" to="/"><ArrowLeft /></Link></div><div className="fav-headline"><h1>Favorite Translations</h1></div></div> : null}
+        {!favorites.length ? <div className={darkMode ? "fav-headline__wrapper__dark" : "fav-headline__wrapper" }><div><Link className="fav-goBack" to="/"><ArrowLeft /></Link></div><div className="fav-headline"><h1>No favorite translations</h1></div></div> : null}
         <div className="fav-wrapper">
             {favorites.map((item, index) => 
             <div key={index}>
@@ -43,7 +43,7 @@ const Favorites = ({darkMode}: IPageProps) => {
             )}
         </div>
         <div className="fav-options">
-          {favorites.length ? <div className="clear-favs"><button className="clear-favs-btn" onClick={() => clearFavorites()}>Clear Favorites</button></div> : null}
+          {favorites.length ? <div className="clear-favs"><button className={darkMode ? "clear-favs-btn__dark" : "clear-favs-btn" } onClick={() => clearFavorites()}>Clear Favorites</button></div> : null}
         </div>
       </div>
       <div className="bottom-space"></div>

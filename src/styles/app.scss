@@ -14,7 +14,7 @@
     background-color: #F5F5F5;
   }
   .dark-mode {
-    background-image: linear-gradient(to bottom, #24242E 33%, black 33%);
+    background-image: linear-gradient(to bottom, #24242E 33%, rgb(21, 21, 21) 33%);
     height: 100%;
     transition: background-image 0.25s ease-in-out;
   }

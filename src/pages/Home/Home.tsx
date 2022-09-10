@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { useAppSelector, useAppDispatch } from '../../../src/store/hooks';
-import { clearTranslation, fetchData, addToRecentTranslations } from "../../store/reducers/translations/translationsReducer";
+import { clearTranslation, fetchData, addToRecentTranslations, addToFavorites } from "../../store/reducers/translations/translationsReducer";
 import { IFetchQueries } from "../../../src/interfaces/IFetchQueries";
 import TextField from '../../components/TextField/TextField';
 import TextFieldSkeleton from "../../components/TextFieldSkeleton/TextFieldSkeleton";
@@ -58,6 +58,20 @@ function Home({darkMode}: IPageProps) {
     }
   }
 
+  const addTranslationToFavorites = () => {
+    if(queryText && translation && detectedLanguage !== selectedLanguage) {
+     const favoriteTranslation: ITranslation = {
+        from: detectedLanguage,
+        text: queryText,
+        to: selectedLanguage,
+        translation: translation
+    }
+     dispatch(addToFavorites(favoriteTranslation));
+     setAddedToFavPopUp(true);
+     setTimeout(() => setAddedToFavPopUp(false), 1000);
+    }
+  }
+
   useEffect(() => {
   const delayDebounceFn = setTimeout(() => {
   setQueryText(queryText);
@@ -86,10 +100,10 @@ function Home({darkMode}: IPageProps) {
         </div>
         <div className="translation-fields">
           <div className={darkMode ? "translation-field__dark" : "translation-field"}>
-            <TextField queryText={queryText} setQueryText={setQueryText} disabled={false} placeholder=" Text to translate... (max 1000 characters)" darkMode={darkMode} inputField={true} setCopiedPopUp={setCopiedPopUp} setAddedToFavPopUp={setAddedToFavPopUp} selectedLanguage={selectedLanguage} /> 
+            <TextField queryText={queryText} setQueryText={setQueryText} disabled={false} placeholder=" Text to translate... (max 1000 characters)" darkMode={darkMode} inputField={true} setCopiedPopUp={setCopiedPopUp} setAddedToFavPopUp={setAddedToFavPopUp} selectedLanguage={selectedLanguage} addTranslationToFavorites={addTranslationToFavorites} /> 
           </div>
           <div className="translation-field__output">
-            {queryText.trim() && !translation ? <TextFieldSkeleton darkMode={darkMode} /> : <TextField queryText={translation} setQueryText={setQueryText} disabled={true} placeholder=" Translation..."  darkMode={darkMode} inputField={false} setCopiedPopUp={setCopiedPopUp} setAddedToFavPopUp={setAddedToFavPopUp} selectedLanguage={selectedLanguage} />}
+            {queryText.trim() && !translation ? <TextFieldSkeleton darkMode={darkMode} /> : <TextField queryText={translation} setQueryText={setQueryText} disabled={true} placeholder=" Translation..."  darkMode={darkMode} inputField={false} setCopiedPopUp={setCopiedPopUp} setAddedToFavPopUp={setAddedToFavPopUp} selectedLanguage={selectedLanguage} addTranslationToFavorites={addTranslationToFavorites} />}
           </div>
         </div>
       </div>
