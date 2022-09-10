@@ -21,7 +21,7 @@ function App() {
         <div className="switch-checkbox">
           <label className="switch">
             <input type="checkbox" onChange={() => setDarkMode(!darkMode)} />
-            <span className="slider round"> </span>
+            <span className="slider round"></span>
           </label>
         </div>
         <span className="toggle-icon" style={{ color: darkMode ? "#c96dfd" : "grey" }}>☽</span>

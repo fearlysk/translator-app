@@ -22,8 +22,8 @@ const History = ({darkMode}: IPageProps) => {
       <div className={darkMode ? "history-page-wrapper__dark" : "history-page-wrapper"}>
         <div className="fields-history__wrapper">
         <div className="history-goBack__wrapper"><div><Link className="history-goBack" to="/">&larr; Go back</Link></div></div>
-        {history.length ? <h1 className="history-headline">History of translations</h1> : null}
-        {!history.length ? <h2 className="no-history">No translations</h2> : null}
+        {history.length ? <div className={darkMode ? "history-headline__wrapper__dark" : "history-headline__wrapper" }><h1 className="history-headline">History of translations</h1></div> : null}
+        {!history.length ? <div className={darkMode ? "history-headline__wrapper__dark" : "history-headline__wrapper" }><h2 className="no-history">No translations</h2></div> : null}
         <div className="history-wrapper">
             {history.map((item, index) => 
             <div key={index}>

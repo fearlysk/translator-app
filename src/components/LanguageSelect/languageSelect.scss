@@ -2,7 +2,7 @@ select:focus {
     outline: none;
 }
 @media screen and (max-width: 1080px) {
-    .select-menu {
+    .select-menu, .select-menu__dark {
         padding: 13px 10px;
         width: 90% !important;
         transition: 0.3s;
@@ -12,13 +12,12 @@ select:focus {
 }
 .select-menu__wrapper {
     width: 100%;
-    
 }
 .select-menu__dark {
     background-color: transparent;
     color: white;
     padding: 13px 10px;
-    width: 30%;
+    width: 40%;
     transition: 0.3s;
     font-size: 1em;
     border: 0;
@@ -27,7 +26,7 @@ select:focus {
 .select-menu {
     background-color: transparent;
     padding: 13px 10px;
-    width: 30%;
+    width: 40%;
     transition: 0.3s;
     font-size: 1em;
     border: 0;
@@ -46,11 +45,17 @@ select:focus {
 .select-menu:hover {
     color: #3f6bd9;
     transition: 0.3s;
+    cursor: pointer;
 }
 .select-menu__dark:hover {
-    color: rgb(133, 171, 235);
+    color: #2e2e2e;
+    cursor: pointer;
 }
 .select-menu__option {
     background-color: white;
     color: #3f6bd9;
+}
+.select-menu__option__dark {
+    background-color: #ababab;
+    color: #2e2e2e;
 }

@@ -9,12 +9,12 @@ const LanguageSelect = ({selectedLanguage, setSelectedLanguage, darkMode, detect
           className={darkMode ? "select-menu__dark" : "select-menu"}
           value={selectedLanguage}
           onChange={(e) => setSelectedLanguage(e.target.value)}>
-            {detectLangOption ? <option className="select-menu__option" value="detect">Detect language</option> : null}
-            <option className="select-menu__option" value="ru">Russian</option>
-            <option className="select-menu__option" value="en">English</option>
-            <option className="select-menu__option" value="de">Deutsch</option>
-            <option className="select-menu__option" value="es">Espanol</option>
-            <option className="select-menu__option" value="it">Italian</option> 
+            {detectLangOption ? <option className="select-menu__option" value="detect">DETECT LANGUAGE</option> : null}
+            <option className={darkMode ? "select-menu__option__dark" : "select-menu__option"} value="ru">RUSSIAN</option>
+            <option className={darkMode ? "select-menu__option__dark" : "select-menu__option"} value="en">ENGLISH</option>
+            <option className={darkMode ? "select-menu__option__dark" : "select-menu__option"} value="de">DEUTSCH</option>
+            <option className={darkMode ? "select-menu__option__dark" : "select-menu__option"} value="es">ESPANOL</option>
+            <option className={darkMode ? "select-menu__option__dark" : "select-menu__option"} value="it">ITALIAN</option> 
         </select>
     </div>
   )

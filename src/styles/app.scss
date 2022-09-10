@@ -11,24 +11,34 @@
   body {
     min-height: 100vh;
     height: 100%;
-  
+    background-color: #F5F5F5;
   }
   .dark-mode {
-    background-color: #1a1919;
+    background-image: linear-gradient(to bottom, #24242E 33%, black 33%);
     height: 100%;
-    transition: background-color 0.25s ease-in-out;
+    transition: background-image 0.25s ease-in-out;
   }
   .light-mode {
-    background-color: #fff;
+    background-image: linear-gradient(to bottom, #F0F0F0 33%, #F5F5F5 33%);
     height: 100%;
-    transition: background-color 0.25s ease-in-out;
+    transition: background-image 0.25s ease-in-out;
+  }
+  @media screen and (max-width: 600px) {
+    .toggle-icon {
+      font-size: 2em !important; 
+    }
+    .switch-checkbox {
+      padding: 3px !important;
+    }
+    .container {
+      margin-right: 10px !important;
+    }
   }
   .container {
     display: flex;
     justify-content: center;
-    align-items: center
+    align-items: center;
   }
-  
   .switch {
     position: relative;
     display: inline-block;
@@ -93,7 +103,6 @@
     transform: translateX(26px);
   }
   
-  /* Rounded sliders */
   .slider.round {
     border-radius: 34px;
   }
