@@ -145,11 +145,17 @@
         top: 0 !important;
         padding: 2px!important;
     }
+    .fav-link, .history-link, .fav-link__dark, .history-link__dark {
+        padding: 10px !important; 
+    }
 }
 @media screen and (max-width: 370px) {
     .secondary-options__view {
         margin-left: 4px;
         font-size: 0.5em;
+    }
+    .fav-link, .history-link, .fav-link__dark, .history-link__dark {
+        padding: 10px 5px !important; 
     }
 }
 
@@ -183,7 +189,7 @@
     transition: 0.3s;
 }
 .fav-link, .history-link {
-    padding: 10px;
+    padding: 10px 20px;
     text-decoration: none;
     color: black;
     border-radius: 8px;
@@ -192,7 +198,7 @@
     box-shadow: 2px 3px 10px rgba(151, 150, 150, 0.2);
 }
 .fav-link__dark, .history-link__dark {
-    padding: 10px;
+    padding: 10px 20px;
     text-decoration: none;
     color: black;
     border-radius: 8px;
