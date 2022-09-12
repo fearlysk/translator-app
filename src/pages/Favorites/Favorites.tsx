@@ -3,6 +3,7 @@ import ArrowLeft from "../../components/UI/ArrowLeft/ArrowLeft";
 import { useAppSelector, useAppDispatch } from '../../../src/store/hooks';
 import { clearFavoriteTranslations, removeFavoriteTranslation } from "../../store/reducers/translations/translationsReducer";
 import { IPageProps } from "../../interfaces/IPageProps";
+import routes from "../../constants/routes";
 import './favorites.scss';
 
 const Favorites = ({darkMode}: IPageProps) => {
@@ -22,8 +23,8 @@ const Favorites = ({darkMode}: IPageProps) => {
     return (
       <div className={darkMode ? "favorites-page-wrapper__dark" : "favorites-page-wrapper"}>
         <div className={darkMode ? "fields-favorites__wrapper__dark" : "fields-favorites__wrapper" }>
-        {favorites.length ? <div className={darkMode ? "fav-headline__wrapper__dark" : "fav-headline__wrapper" }><div><Link className="fav-goBack" to="/"><ArrowLeft /></Link></div><div className="fav-headline"><h1>Favorite Translations</h1></div></div> : null}
-        {!favorites.length ? <div className={darkMode ? "fav-headline__wrapper__dark" : "fav-headline__wrapper" }><div><Link className="fav-goBack" to="/"><ArrowLeft /></Link></div><div className="fav-headline"><h1>No favorite translations</h1></div></div> : null}
+        {favorites.length ? <div className={darkMode ? "fav-headline__wrapper__dark" : "fav-headline__wrapper" }><div><Link className="fav-goBack" to={routes.HOME}><ArrowLeft /></Link></div><div className="fav-headline"><h1>Favorite Translations</h1></div></div> : null}
+        {!favorites.length ? <div className={darkMode ? "fav-headline__wrapper__dark" : "fav-headline__wrapper" }><div><Link className="fav-goBack" to={routes.HOME}><ArrowLeft /></Link></div><div className="fav-headline"><h1>No favorite translations</h1></div></div> : null}
         <div className="fav-wrapper">
             {favorites.map((item, index) => 
             <div key={index}>

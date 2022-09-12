@@ -3,6 +3,7 @@ import ArrowLeft from "../../components/UI/ArrowLeft/ArrowLeft";
 import { useAppSelector, useAppDispatch } from '../../../src/store/hooks';
 import { clearRecentTranslations, removeRecentTranslation } from "../../store/reducers/translations/translationsReducer";
 import { IPageProps } from "../../interfaces/IPageProps";
+import routes from "../../constants/routes";
 import './history.scss';
 
 const History = ({darkMode}: IPageProps) => {
@@ -22,8 +23,8 @@ const History = ({darkMode}: IPageProps) => {
     return (
       <div className={darkMode ? "history-page-wrapper__dark" : "history-page-wrapper"}>
         <div className={darkMode ? "fields-history__wrapper__dark" : "fields-history__wrapper" }>
-        {history.length ? <div className={darkMode ? "history-headline__wrapper__dark" : "history-headline__wrapper" }><div><Link className="history-goBack" to="/"><ArrowLeft /></Link></div><div className="history-headline"><h1>History of translations</h1></div></div> : null}
-        {!history.length ? <div className={darkMode ? "history-headline__wrapper__dark" : "history-headline__wrapper" }><div><Link className="history-goBack" to="/"><ArrowLeft /></Link></div><div className="history-headline"><h1>No translations</h1></div></div> : null}
+        {history.length ? <div className={darkMode ? "history-headline__wrapper__dark" : "history-headline__wrapper" }><div><Link className="history-goBack" to={routes.HOME}><ArrowLeft /></Link></div><div className="history-headline"><h1>History of translations</h1></div></div> : null}
+        {!history.length ? <div className={darkMode ? "history-headline__wrapper__dark" : "history-headline__wrapper" }><div><Link className="history-goBack" to={routes.HOME}><ArrowLeft /></Link></div><div className="history-headline"><h1>No translations</h1></div></div> : null}
         <div className="history-wrapper">
             {history.map((item, index) => 
             <div key={index}>

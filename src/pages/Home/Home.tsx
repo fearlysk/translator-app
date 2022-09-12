@@ -13,6 +13,7 @@ import Star from "../../components/UI/Star/Star";
 import Pen from "../../components/UI/Pen/Pen";
 import { ITranslation } from "../../interfaces/ITranslation";
 import { IPageProps } from "../../interfaces/IPageProps";
+import routes from "../../constants/routes";
 import './home.scss';
 import 'react-loading-skeleton/dist/skeleton.css';
 
@@ -87,7 +88,7 @@ function Home({darkMode}: IPageProps) {
   }, 350)
 
    return () => clearTimeout(delayDebounceFn)
-  }, [queryText, selectedLanguage, translation, detectedLanguage, inputLanguage])
+  }, [queryText, selectedLanguage, detectedLanguage, inputLanguage])
 
   return (
     <div className={darkMode ? "wrapper__dark" : "wrapper"}>
@@ -111,8 +112,8 @@ function Home({darkMode}: IPageProps) {
           <div className="secondary-options">
             <div className="secondary-options__item">
               <div className="secondary-options__item-first">
-                <div className="secondary-options__view"><Link className={darkMode ? "fav-link__dark" : "fav-link"} to="favorites">View favorites <span className="star__wrapper"><Star /></span></Link></div>
-                <div className="secondary-options__view"><Link className={darkMode ? "history-link__dark" : "history-link"} to="history">View history <span className="pen__wrapper"><Pen /></span></Link></div>
+                <div className="secondary-options__view"><Link className={darkMode ? "fav-link__dark" : "fav-link"} to={routes.FAVORITES}>View favorites <span className="star__wrapper"><Star /></span></Link></div>
+                <div className="secondary-options__view"><Link className={darkMode ? "history-link__dark" : "history-link"} to={routes.HISTORY}>View history <span className="pen__wrapper"><Pen /></span></Link></div>
               </div>
             </div>
             <div className="secondary-options__item">
