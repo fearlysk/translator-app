@@ -88,7 +88,8 @@ export const translationsSlice = createSlice({
   },
 })
 
-export const { setQueryValue, clearTranslation, addToFavorites, clearFavoriteTranslations, removeFavoriteTranslation, addToRecentTranslations, removeRecentTranslation, clearRecentTranslations } = translationsSlice.actions;
+export const { setQueryValue, clearTranslation, addToFavorites, clearFavoriteTranslations,
+  removeFavoriteTranslation, addToRecentTranslations, removeRecentTranslation, clearRecentTranslations} = translationsSlice.actions;
 export const selectCount = (state: RootState) => state.translations.translation;
 
 export default translationsSlice.reducer;

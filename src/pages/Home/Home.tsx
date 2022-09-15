@@ -119,13 +119,13 @@ function Home({darkMode}: IPageProps) {
     }
 
     if(queryText.trim()) {
-      dispatch(fetchData(params))
+     await dispatch(fetchData(params))
         .then(addTranslationToRecent() as never)
         .catch(() => setIsErrorModalHidden(false));
       } else {
         dispatch(clearTranslation());
       }
-    }, 350)
+    }, 300)
   
      return () => clearTimeout(delayDebounceFn)
     }, [queryText, selectedLanguage, detectedLanguage, inputLanguage, translation])

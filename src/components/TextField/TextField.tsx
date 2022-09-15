@@ -1,16 +1,18 @@
 import { useState } from "react";
 import Tippy from '@tippyjs/react';
-import { useAppSelector } from "../../store/hooks";
+import { useAppDispatch, useAppSelector } from "../../store/hooks";
 import Star from "../UI/Star/Star";
 import Copy from "../Copy/CopyIcon/Copy";
 import { ITextFieldProps } from "../../interfaces/ITextFieldProps";
 import "./textField.scss";
 import 'tippy.js/dist/tippy.css'; 
+import { clearTranslation } from "../../store/reducers/translations/translationsReducer";
 
 const TextField = ({ queryText, setQueryText, disabled, placeholder, darkMode, inputField, addedToFavsModalVisible, 
   addTranslationToFavorites, isTranslationInFavs, removeTranslationFromFavorites, tooltipMessage}: ITextFieldProps) => {
 
   const translation = useAppSelector((state) => state.translations.translation);
+  const dispatch = useAppDispatch();
 
   const [copiedModalVisible, setCopiedModalVisible] = useState(false);
 
@@ -30,6 +32,11 @@ const TextField = ({ queryText, setQueryText, disabled, placeholder, darkMode, i
     showCopiedModal();
   }
 
+  const onChangeHandler = (value: string) => {
+    setQueryText(value);
+    dispatch(clearTranslation());
+  }
+
     return (
       <div>
         <div className="textfield__wrapper">
@@ -38,7 +45,7 @@ const TextField = ({ queryText, setQueryText, disabled, placeholder, darkMode, i
             placeholder={placeholder}
             value={queryText}
             disabled={disabled}
-            onChange={(e) => setQueryText(e.target.value)}
+            onChange={(e) => onChangeHandler(e.target.value)}
             maxLength={maxLength}
           />
           {inputField ?
