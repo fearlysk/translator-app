@@ -1,16 +1,23 @@
-import { useAppSelector, useAppDispatch } from "../../store/hooks";
-import { addToFavorites } from "../../store/reducers/translations/translationsReducer";
+import { useState } from "react";
+import Tippy from '@tippyjs/react';
+import { useAppSelector } from "../../store/hooks";
 import Star from "../UI/Star/Star";
 import Copy from "../Copy/CopyIcon/Copy";
 import { ITextFieldProps } from "../../interfaces/ITextFieldProps";
-import { ITranslation } from "../../interfaces/ITranslation";
 import "./textField.scss";
+import 'tippy.js/dist/tippy.css'; 
 
-const TextField = ({queryText, setQueryText, disabled, placeholder, darkMode, inputField, setCopiedPopUp, setAddedToFavPopUp, selectedLanguage, addTranslationToFavorites}: ITextFieldProps) => {
+const TextField = ({ queryText, setQueryText, disabled, placeholder, darkMode, inputField, addedToFavsModalVisible, 
+  addTranslationToFavorites, isTranslationInFavs, removeTranslationFromFavorites, tooltipMessage}: ITextFieldProps) => {
 
   const translation = useAppSelector((state) => state.translations.translation);
-  const detectedLanguage = useAppSelector((state) => state.translations.detectedLanguage);
-  const dispatch = useAppDispatch();
+
+  const [copiedModalVisible, setCopiedModalVisible] = useState(false);
+
+  const showCopiedModal = () => {
+    setCopiedModalVisible(true);
+    setTimeout(() => setCopiedModalVisible(false), 700);
+  };
 
   const maxLength = 1000;
 
@@ -20,25 +27,8 @@ const TextField = ({queryText, setQueryText, disabled, placeholder, darkMode, in
 
   const copyToClipboard = () => {
     navigator.clipboard.writeText(translation);
-    setCopiedPopUp(true);
-    setTimeout(() => setCopiedPopUp(false), 1000);
+    showCopiedModal();
   }
-
-  // const addTranslationToFavorites = () => {
-  //   if(queryText && translation && detectedLanguage !== selectedLanguage) {
-  //    const favoriteTranslation: ITranslation = {
-  //       from: detectedLanguage,
-  //       text: queryText,
-  //       to: selectedLanguage,
-  //       translation: translation
-  //   }
-  //   console.log("text :", queryText);
-  //   console.log("tra: ", translation);
-  //    dispatch(addToFavorites(favoriteTranslation));
-  //    setAddedToFavPopUp(true);
-  //    setTimeout(() => setAddedToFavPopUp(false), 1000);
-  //   }
-  // }
 
     return (
       <div>
@@ -62,8 +52,21 @@ const TextField = ({queryText, setQueryText, disabled, placeholder, darkMode, in
         
         {!inputField ? 
           <div className="textfield__options">
-            {queryText && translation ? <div className="textfield__options-btn"><button className={darkMode ? "action-btn__dark" : "action-btn"} onClick={addTranslationToFavorites}><Star /></button></div> : null }
-            <div className="textfield__options-btn"><button className={darkMode ? "action-btn__dark" : "action-btn"} onClick={() => copyToClipboard()}><Copy /></button></div>
+            {queryText && translation ? 
+              <div className="textfield__options-btn">
+                <Tippy content={<span>{tooltipMessage}</span>} visible={addedToFavsModalVisible}>
+                  <button className={darkMode ? "action-btn__dark" : "action-btn"} onClick={isTranslationInFavs ? removeTranslationFromFavorites : addTranslationToFavorites}>
+                    <Star isTranslationInFavs={isTranslationInFavs} />
+                  </button>
+                </Tippy>
+              </div> : null }
+            <div className="textfield__options-btn">
+              <Tippy content={<span>Copied!</span>} visible={copiedModalVisible}>
+                <button className={darkMode ? "action-btn__dark" : "action-btn"} onClick={() => copyToClipboard()}>
+                  <Copy />
+                </button>
+              </Tippy>
+              </div>
           </div>
         : null}
       </div>

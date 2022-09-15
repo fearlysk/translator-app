@@ -5,8 +5,9 @@ export interface ITextFieldProps {
     placeholder: string,
     darkMode: boolean,
     inputField: boolean,
-    setCopiedPopUp(value: boolean): void,
-    setAddedToFavPopUp(value: boolean): void,
-    selectedLanguage: string,
-    addTranslationToFavorites?(): void
+    addedToFavsModalVisible: boolean,
+    addTranslationToFavorites?(): void,
+    removeTranslationFromFavorites?(): void,
+    isTranslationInFavs: boolean,
+    tooltipMessage: string
 }

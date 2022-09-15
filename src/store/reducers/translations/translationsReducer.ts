@@ -29,7 +29,9 @@ export const fetchData = (createAsyncThunk("data/fetchData", async (queries: IFe
     const data = await fetch(`https://microsoft-translator-text.p.rapidapi.com/translate?to=${queries.lang}&api-version=3.0&profanityAction=NoAction&textType=plain`, options)
         .then(response => response.json())
         .then(response => response)
-        .catch(err => console.error(err));
+        .catch(err => {
+          console.error(err);
+        });
 
     return data;
 
@@ -53,7 +55,7 @@ export const translationsSlice = createSlice({
     },
    addToFavorites: (state, action) => {
     if (_.findWhere(state.favoriteTranslations, action.payload) == null) {
-       state.favoriteTranslations.unshift(action.payload);
+      state.favoriteTranslations.unshift(action.payload);
     }
     }, 
    clearRecentTranslations: (state) => {
