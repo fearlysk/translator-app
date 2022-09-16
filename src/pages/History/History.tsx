@@ -23,14 +23,36 @@ const History = ({darkMode}: IPageProps) => {
     return (
       <div className={darkMode ? "history-page-wrapper__dark" : "history-page-wrapper"}>
         <div className={darkMode ? "fields-history__wrapper__dark" : "fields-history__wrapper" }>
-        {history.length ? <div className={darkMode ? "history-headline__wrapper__dark" : "history-headline__wrapper" }><div><Link className="history-goBack" to={routes.HOME}><ArrowLeft /></Link></div><div className="history-headline"><h1>History of translations</h1></div></div> : null}
-        {!history.length ? <div className={darkMode ? "history-headline__wrapper__dark" : "history-headline__wrapper" }><div><Link className="history-goBack" to={routes.HOME}><ArrowLeft /></Link></div><div className="history-headline"><h1>No translations</h1></div></div> : null}
+        
+        {history.length ?
+        <div className={darkMode ? "history-headline__wrapper__dark" : "history-headline__wrapper" }>
+          <div>
+            <Link className="history-goBack" to={routes.HOME}><ArrowLeft /></Link>
+          </div>
+          <div className="history-headline">
+            <h1>History of translations</h1>
+          </div>
+        </div> : null}
+        
+        {!history.length ? 
+        <div className={darkMode ? "history-headline__wrapper__dark" : "history-headline__wrapper" }>
+          <div>
+            <Link className="history-goBack" to={routes.HOME}><ArrowLeft /></Link>
+          </div>
+          <div className="history-headline">
+            <h1>No translations</h1>
+          </div>
+        </div> : null}
         <div className="history-wrapper">
             {history.map((item, index) => 
             <div key={index}>
               <div className="history-translation">
                 <div className="history-translation__header">
-                  <div><h1><span className={darkMode ? "history-lang__dark" : "history-lang"}>&#9997; {item.from}</span> &rarr; <span className={darkMode ? "history-lang__dark" : "history-lang"}>{item.to}</span></h1></div>
+                  <div>
+                    <h1>
+                      <span className={darkMode ? "history-lang__dark" : "history-lang"}>&#9997; {item.from}</span> &rarr; <span className={darkMode ? "history-lang__dark" : "history-lang"}>{item.to}</span>
+                    </h1>
+                    </div>
                   <div><button className="remove-history" onClick={() => removeTranslation(index)}>&#10006;</button></div>
                 </div>
                 <div className="history-translation__item">
