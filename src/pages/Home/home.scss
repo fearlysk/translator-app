@@ -143,9 +143,11 @@
     .switch-lang-tooltip, .switch-lang-tooltip__dark {
         width: 60% !important;
         font-size: 0.85em;
-        left: 3% !important;
+        left: 33% !important;
         top: 0 !important;
         padding: 8px 0!important;
+        position: relative;
+        right: 0px;
     }
     .switch-btn, .switch-btn__dark {
         padding: 5px !important;
@@ -169,9 +171,12 @@
     .switch-lang-tooltip, .switch-lang-tooltip__dark {
         width: 55% !important;
         font-size: 0.55em;
-        left: 3% !important;
+        left: 30% !important;
         top: 0 !important;
         padding: 8px 0!important;
+        position: relative;
+        right: 0px;
+
     }
     .switch-btn, .switch-btn__dark {
         padding: 5px !important;

@@ -32,19 +32,13 @@
     }
     .container {
       margin-right: 10px !important;
-      display: flex !important;
-      align-items: center !important;
-      align-content: flex-end !important;
-      justify-content: right !important;
     }
   }
   .container {
-    display: flex !important;
-    // justify-content: center;
-    align-items: center !important;
-    align-content: flex-end !important;
-    justify-content: right !important;
-    margin-right: 40px !important;
+    display: flex;
+    align-items: center;
+    justify-content: right;
+    margin-right: 40px;
   }
   .switch {
     position: relative;
