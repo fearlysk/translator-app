@@ -136,17 +136,21 @@ function Home({darkMode}: IPageProps) {
      {!isErrorModalHidden ? <ErrorModal setIsErrorModalHidden={setIsErrorModalHidden} /> : null }
 
       {translation && inputLanguage !== detectedLanguage && inputLanguage !== "detect" ? 
+  
       <div className={darkMode ? "switch-lang-tooltip__dark" : "switch-lang-tooltip"}>
         <h3> &#x2757; Detected language: {detectedLanguage.toUpperCase()} 
           <button className={darkMode ? "switch-btn__dark" : "switch-btn"} onClick={() => setDetectedLanguage()}>Switch</button>
         </h3>
       </div> : null}
+     
      <div className={darkMode ? "fields__wrapper__dark" : "fields__wrapper"}>
+       
         <div className={darkMode ? "options-field__dark" : "options-field"}>
           <LanguageSelect selectedLanguage={inputLanguage} setSelectedLanguage={setInputLanguage} darkMode={darkMode} detectLangOption={true} />
           <button className={darkMode ? "options-field__switch__dark" : "options-field__switch"}  onClick={() => switchLanguages()}><Arrows darkMode={darkMode} /></button>
           <LanguageSelect selectedLanguage={selectedLanguage} setSelectedLanguage={setSelectedLanguage} darkMode={darkMode} detectLangOption={false} />
         </div>
+        
         <div className="translation-fields">
           <div className={darkMode ? "translation-field__dark" : "translation-field"}>
             <TextField queryText={queryText} setQueryText={setQueryText} disabled={false} placeholder=" Text to translate... (max 1000 characters)"
@@ -162,7 +166,9 @@ function Home({darkMode}: IPageProps) {
             />}
           </div>
         </div>
+      
       </div>
+     
       <div className="secondary-options-field">
         <div className="secondary-options">
           <div className="secondary-options__item">
